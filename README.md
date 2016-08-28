@@ -57,7 +57,7 @@ The currently state of gem is more of a proof of concept. This gem will very lik
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/weather_judge.
+Bug reports and pull requests are welcome on GitHub at https://github.com/makotogitdev/weather_judge.
 
 
 ## License
