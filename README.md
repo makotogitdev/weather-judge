@@ -1,6 +1,6 @@
 # WeatherJudge
 
-This gem retrieves weather forecasting data from Forecast.IO and returns an overall score, using the following.
+This gem retrieves weather forecasting data from Forecast.IO via [forecast-ruby](https://github.com/darkskyapp/forecast-ruby) and returns an overall score, using the following.
 - Temperature
 - Sky Cover
 - Wind speed
