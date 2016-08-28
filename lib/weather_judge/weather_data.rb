@@ -9,10 +9,13 @@ module WeatherJudge
       @forecast_today = forecast_today
     end
 
+    # Returns raw forecast data object
     def raw_data
       @forecast_today
     end
 
+    # Returns total location score based on forecast. It is the sum of
+    # cloud cover score, percent rain score, wind score, and temperature score.
     def total_location_score
       cloud_cover_score + percent_rain_score + wind_score + temperature_score
     end
