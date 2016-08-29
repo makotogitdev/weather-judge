@@ -11,13 +11,15 @@ describe WeatherJudge do
       allow(ForecastIO).to receive(:forecast).and_return(forecast_data)
     end
 
+    subject { WeatherJudge.run(44, -125) }
+
     it 'calls to get forecast' do
-      WeatherJudge.run(44, -125)
+      subject
       expect(ForecastIO).to have_received(:forecast).once
     end
 
     it 'returns WeatherData' do
-      expect(WeatherJudge.run(44, -125)).to be_instance_of(WeatherJudge::WeatherData)
+      expect(subject).to be_instance_of(WeatherJudge::WeatherData)
     end
   end
 end
