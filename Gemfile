@@ -4,3 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'forecast_io'
+
+ruby '2.3.1'
