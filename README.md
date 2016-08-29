@@ -64,7 +64,7 @@ update the version number in `version.rb`, and then run `bundle exec rake releas
 git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Future Plans/Disclaimer
-The currently state of this gem is more of a proof of concept. This gem was originally developed to be
+The current state of this gem is more of a proof of concept. This gem was originally developed to be
 used in my personal project for ranking overall weather of different locations, but feel free to use 
 it for any purpose. This gem will be evolving in the near future. A couple of obvious future plans are:
  - Add ability to change preferred weather aspects for scoring
