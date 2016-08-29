@@ -7,7 +7,8 @@ Gem::Specification.new do |spec|
   spec.name          = "weather_judge"
   spec.version       = WeatherJudge::VERSION
   spec.authors       = ["Makoto Scott-Hinkle"]
-  spec.email         = ["makoto@teamtreehouse.com"]
+  spec.email         = ["makoto.scotthinkle@gmail.com"]
+  spec.homepage      = "https://github.com/makotogitdev/weather-judge"
 
   spec.summary       = %q{Scores weather forecast on given coordinates.}
   spec.description   = %q{This gem gives a score to given coordinate's weather forecast. It uses Forecast.IO as data source.}
@@ -20,5 +21,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", "~> 0"
 end
