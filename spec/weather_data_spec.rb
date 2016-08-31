@@ -1,11 +1,33 @@
 require 'spec_helper'
 
 describe WeatherJudge::WeatherData do
+  DELTA = 0.0001
+
   describe '#cloud_cover_score' do
-    it 'should return cloud cover score multiplied by score weight' do
-      forecast = double("Forecast", :cloudCover => 0.80)
-      data = WeatherJudge::WeatherData.new(forecast)
-      expect(data.cloud_cover_score).to eq(20)
+    context 'when max cloud cover is not defined' do
+      it 'should return correct cloud cover score' do
+        forecast = double("Forecast", :cloudCover => 0.80)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.cloud_cover_score).to be_within(DELTA).of(5.0)
+      end
+    end
+
+    context 'when max cloud cover is defined' do
+      before do
+        WeatherJudge.max_cloud_cover = 0.60
+      end
+
+      it 'should return correct cloud cover score based on proximity to max cloud cover' do
+        forecast = double("Forecast", :cloudCover => 0.20)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.cloud_cover_score).to be_within(DELTA).of(16.6666)
+      end
+
+      it 'should return 0 when cloud cover is beyond the maximum' do
+        forecast = double("Forecast", :cloudCover => 0.80)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.cloud_cover_score).to eq(0)
+      end
     end
   end
 

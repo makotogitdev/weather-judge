@@ -1,3 +1,6 @@
+require 'bigdecimal'
+require 'bigdecimal/util'
+
 # Calculates score for 4 different weather aspects: sky cover,
 # chance of rain, wind, and temperature
 
@@ -21,7 +24,15 @@ module WeatherJudge
     end
 
     def cloud_cover_score
-      @forecast_today.cloudCover * SCORE_WEIGHT
+      if !WeatherJudge.max_cloud_cover.nil?
+        if @forecast_today.cloudCover < WeatherJudge.max_cloud_cover
+          ((WeatherJudge.max_cloud_cover - @forecast_today.cloudCover) / WeatherJudge.max_cloud_cover) * SCORE_WEIGHT
+        else
+          0
+        end
+      else
+        ((1.to_d - @forecast_today.cloudCover) * SCORE_WEIGHT).to_f
+      end
     end
 
     def percent_rain_score
