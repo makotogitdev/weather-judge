@@ -2,16 +2,16 @@
 
 This gem retrieves weather forecasting data from Forecast.IO via [forecast-ruby](https://github.com/darkskyapp/forecast-ruby) 
 using longitude and latitude and returns an overall score. The following criteria are used to judge
-the quality of weather. The total score is up to 100. 
+the quality of weather. The maximum score you can get is 100. 
 
 - Temperature
 - Sky Cover
 - Wind speed
-- Change of Rain
+- Chance of Rain
 
 Currently it only evaluates today's data but I plan on adding an ability to take a specified date. This is 
-more of a proof of concept at this point. Since there are four criteria at the moment, each of them holds
-up to 25 points. Optimal weather is considered as a day with comfortable temperature, less than 15 mph wind, 
+more of a proof of concept at this point. Since there are four criteria, each criteria can be given
+up to 25 points. Optimal weather is considered as a day with comfortable temperature (67-77F), less than 15 mph wind, 
 low chance of rain, and low sky cover.
 
 ## Installation
@@ -64,9 +64,9 @@ update the version number in `version.rb`, and then run `bundle exec rake releas
 git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Future Plans/Disclaimer
-The current state of this gem is more of a proof of concept. This gem was originally developed to be
-used in my personal project for ranking overall weather of different locations, but feel free to use 
-it for any purpose. This gem will be evolving in the near future. A couple of obvious future plans are:
+This gem was originally developed to be used in my personal project for ranking overall weather of 
+different locations, but feel free to use it for any other purpose. This gem will be evolving in the 
+near future. A couple of obvious future plans are:
  - Add ability to change preferred weather aspects for scoring
  - Add ability to specify a date for retrieving scored data
 
