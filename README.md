@@ -31,7 +31,7 @@ Or install it yourself as:
     $ gem install weather_judge
 
 ## Usage
-`WeatherJudge` returns overall weather score, and scores of weather aspect. 
+`WeatherJudge` returns an overall weather score, and scores of weather aspect via `WeatherData` class.
 
 Please see [Forecast IO's documentation](https://developer.forecast.io/) for creating an api key. 
 
@@ -44,7 +44,7 @@ data.total_location_score
 # => returns a score of 0 - 100
 ```
 
-Available methods for `WeatherData`
+List of available methods for `WeatherData`
 - `raw_data`
 - `total_location_score`
 - `cloud_cover_score`
