@@ -60,10 +60,10 @@ describe WeatherJudge::WeatherData do
   end
 
   describe '#wind_score' do
-    it 'should return correct wind score based on 0-15 mph wind' do
+    it 'should return the correct wind score based on 0-15 mph wind' do
       forecast = double("Forecast", :windSpeed => 5)
       data = WeatherJudge::WeatherData.new(forecast)
-      expect(data.wind_score).to be_within(0.01).of(16.666)
+      expect(data.wind_score).to be_within(DELTA).of(16.6666)
     end
 
     it 'should return full score when wind speed is 0' do
@@ -76,6 +76,13 @@ describe WeatherJudge::WeatherData do
       forecast = double("Forecast", :windSpeed => 20)
       data = WeatherJudge::WeatherData.new(forecast)
       expect(data.wind_score).to eq(0)
+    end
+
+    it 'should return the correct score when max wind speed is defined' do
+      WeatherJudge.max_wind_speed = 25
+      forecast = double("Forecast", :windSpeed => 5)
+      data = WeatherJudge::WeatherData.new(forecast)
+      expect(data.wind_score).to be_within(DELTA).of(20.0)
     end
   end
 

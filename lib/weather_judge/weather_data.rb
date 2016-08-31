@@ -33,10 +33,8 @@ module WeatherJudge
 
     def wind_score
       wind_speed = @forecast_today.windSpeed
-      max_wind_speed = 15.to_f
-      if wind_speed == 0
-        SCORE_WEIGHT
-      elsif wind_speed < max_wind_speed
+      max_wind_speed = WeatherJudge.max_wind_speed.to_f
+      if wind_speed < max_wind_speed
         ((max_wind_speed - wind_speed) / max_wind_speed) * SCORE_WEIGHT
       else
         0
