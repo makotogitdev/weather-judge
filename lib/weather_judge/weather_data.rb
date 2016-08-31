@@ -28,7 +28,7 @@ module WeatherJudge
     end
 
     def percent_rain_score
-      @forecast_today.precipProbability * SCORE_WEIGHT
+      score_from_decimal_data(WeatherJudge.max_percent_rain, @forecast_today.precipProbability)
     end
 
     def wind_score
@@ -57,8 +57,8 @@ module WeatherJudge
 
     private
 
-    # Calculates weather quality from decimal data, with an assumption that the higher the
-    # data number the worse. E.g (80% cloud cover returns smaller score than 50% cloud cover.)
+    # Calculates weather quality from decimal data, with an assumption that larger the
+    # data value the worse. E.g. (80% cloud cover returns smaller score than 50% cloud cover.)
     def score_from_decimal_data(max_allowed, data)
       if !max_allowed.nil?
         if data < max_allowed
