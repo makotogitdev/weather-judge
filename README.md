@@ -14,6 +14,14 @@ more of a proof of concept at this point. Since there are four criteria, each cr
 up to 25 points. Optimal weather is considered as a day with comfortable temperature (67-77F), less than 15 mph wind, 
 low chance of rain, and low sky cover.
 
+## Why I Developed This Gem
+
+I currently live in Portland, OR, USA, where we have access to great outdoors. You can easily drive to the 
+coast (Pacific Ocean) or the mountains (Cascade Range) within a few hours. Consequently, we have 
+micro-climates and the weather can vary depending on where you are. I like to hike a lot, so I need 
+to know where would be the best place to go for a day trip easily. I plan to use this gem for an app
+that will rank specified locations to help me decide where to go on the day of the trip. 
+
 ## Installation
 
 Add this line to your application's Gemfile:
