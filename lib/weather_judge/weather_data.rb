@@ -24,15 +24,7 @@ module WeatherJudge
     end
 
     def cloud_cover_score
-      if !WeatherJudge.max_cloud_cover.nil?
-        if @forecast_today.cloudCover < WeatherJudge.max_cloud_cover
-          ((WeatherJudge.max_cloud_cover - @forecast_today.cloudCover) / WeatherJudge.max_cloud_cover) * SCORE_WEIGHT
-        else
-          0
-        end
-      else
-        ((1.to_d - @forecast_today.cloudCover) * SCORE_WEIGHT).to_f
-      end
+      score_from_decimal_data(WeatherJudge.max_cloud_cover, @forecast_today.cloudCover)
     end
 
     def percent_rain_score
@@ -60,6 +52,22 @@ module WeatherJudge
         SCORE_WEIGHT.to_f / 2
       else
         SCORE_WEIGHT.to_f / 4
+      end
+    end
+
+    private
+
+    # Calculates weather quality from decimal data, with an assumption that the higher the
+    # data number the worse. E.g (80% cloud cover returns smaller score than 50% cloud cover.)
+    def score_from_decimal_data(max_allowed, data)
+      if !max_allowed.nil?
+        if data < max_allowed
+          (((max_allowed.to_d - data) / max_allowed) * SCORE_WEIGHT).to_f
+        else
+          0
+        end
+      else
+        ((1.to_d - data) * SCORE_WEIGHT).to_f
       end
     end
   end
