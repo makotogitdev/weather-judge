@@ -11,7 +11,7 @@ the quality of weather. The maximum score you can get is 100.
 
 Currently it only evaluates today's data but I plan on adding an ability to take a specified date. This is 
 more of a proof of concept at this point. Since there are four criteria, each criteria can be given
-up to 25 points. Optimal weather is considered as a day with comfortable temperature (67-77F), less than 15 mph wind, 
+up to 25 points. By default, optimal weather is considered as a day with comfortable temperature (67-77F), less than 15 mph wind, 
 low chance of rain, and low sky cover.
 
 ## Why I Developed This Gem
@@ -39,17 +39,46 @@ Or install it yourself as:
     $ gem install weather_judge
 
 ## Usage
-`WeatherJudge` returns an overall weather score, and scores of weather aspect via `WeatherData` class.
+`WeatherJudge` takes longitude and latitude as input and then returns an overall weather score, and scores of weather aspect via `WeatherData` class.
 
 Please see [Forecast IO's documentation](https://developer.forecast.io/) for creating an api key. 
 
+To configure you can do:
+
 ```ruby
-WeatherJudge.forecast_io_api_key = '(your api key here)'
-data = WeatherJudge.run(44, -122)
+WeatherJudge.configure do |configuration|
+  configuration.forecast_io_api_key = `(your api key here)`
+  configuration.max_cloud_cover = 0.60  
+  configuration.max_percent_rain = 0.30
+  configuration.max_wind_speed = 22
+  configuration.ideal_temp_range = { min: 50, max: 80}
+  configuration.temp_range_delta = 10
+end
+```
+
+or 
+
+```ruby
+WeatherJudge.forecast_io_api_key = `(your api key here)`
+WeatherJudge.max_cloud_cover = 0.60
+# and so forth
+```
+
+More details on configuration
+ - `max_cloud_cover`: Maximum cloud cover you are willing to tolerate. A decimal number between 0 to 1
+ - `max_percent_rain`: Maximum change of rain you are willing to tolerate. A decimal number between 0 to 1
+ - `max_wind_speed`: Maximum wind speed you are willing to tolerate. Default is 15 mph.
+ - `ideal_temp_range`: Ideal temperature range in fahrenheit expressed in hash
+ - `temp_range_delta`: The delta for slightly less than ideal temperate range in fahrenheit
+
+To run, you need to pass in a valid coordinates.
+
+```ruby
+data = WeatherJudge.run(44.123, -122.123)
 # => Returns `WeatherData` object
 
 data.total_location_score
-# => returns a score of 0 - 100
+# => returns a score of up to 100
 ```
 
 List of available methods for `WeatherData`
@@ -78,9 +107,9 @@ git tag for the version, push git commits and tags, and push the `.gem` file to 
 ## Future Plans/Disclaimer
 This gem was originally developed to be used in my personal project for ranking overall weather of 
 different locations, but feel free to use it for any other purpose. This gem will be evolving in the 
-near future. A couple of obvious future plans are:
- - Add ability to change preferred weather aspects for scoring
+near future. A few of obvious future plans are:
  - Add ability to specify a date for retrieving scored data
+ - Other weather criteria to evaluate
 
 ## Contributing
  
