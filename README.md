@@ -53,7 +53,11 @@ data.total_location_score
 ```
 
 List of available methods for `WeatherData`
-- `raw_data`
+- `raw_data` returns forecast data in `Hashie` (More info on Hashie [here](https://github.com/intridea/hashie)) . Example:
+  ```
+  => #<Hashie::Mash apparentTemperatureMax=85.83 apparentTemperatureMaxTime=1472702400 apparentTemperatureMin=79.79 apparentTemperatureMinTime=1472734800 cloudCover=0.17 dewPoint=70.42 humidity=0.72 icon="partly-cloudy-night" moonPhase=0.99 ozone=280.5 precipIntensity=0.001 precipIntensityMax=0.0025 precipIntensityMaxTime=1472677200 precipProbability=0.07 precipType="rain" pressure=1009.95 summary="Partly cloudy in the morning." sunriseTime=1472673538 sunsetTime=1472719928 temperatureMax=81.76 temperatureMaxTime=1472702400 temperatureMin=79.79 temperatureMinTime=1472734800 time=1472652000 windBearing=186 windSpeed=4.09>
+
+  ```
 - `total_location_score`
 - `cloud_cover_score`
 - `wind_score`
