@@ -87,26 +87,57 @@ describe WeatherJudge::WeatherData do
   end
 
   describe '#temperature_score' do
-    it 'should return full score when temperature is between 67 and 77' do
-      forecast = double("Forecast", :temperatureMax => 70)
-      data = WeatherJudge::WeatherData.new(forecast)
-      expect(data.temperature_score).to eq(25)
+    context 'when ideal temperature range is not defined' do
+      it 'should return full score when temperature is between 67 and 77' do
+        forecast = double("Forecast", :temperatureMax => 70)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(25)
+      end
+
+      it 'should return half of score weight when temp is 55-67 or 77-85' do
+        forecast = double("Forecast", :temperatureMax => 60)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(12.5)
+
+        forecast = double("Forecast", :temperatureMax => 80)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(12.5)
+      end
+
+      it 'should return quarter of score weight when temp is outside of 55-85' do
+        forecast = double("Forecast", :temperatureMax => 40)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(6.25)
+      end
     end
 
-    it 'should return half of score weight when temp is 55-67 or 77-85' do
-      forecast = double("Forecast", :temperatureMax => 60)
-      data = WeatherJudge::WeatherData.new(forecast)
-      expect(data.temperature_score).to eq(12.5)
+    context 'when ideal temperature range is defined' do
+      before do
+        WeatherJudge.ideal_temp_range = { min: 65, max: 75 }
+        WeatherJudge.temp_range_delta = 15
+      end
 
-      forecast = double("Forecast", :temperatureMax => 80)
-      data = WeatherJudge::WeatherData.new(forecast)
-      expect(data.temperature_score).to eq(12.5)
-    end
+      it 'should return full score when temperature is between 65 and 75' do
+        forecast = double("Forecast", :temperatureMax => 70)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(25)
+      end
 
-    it 'should return quarter of score weight when temp is outside of 55-85' do
-      forecast = double("Forecast", :temperatureMax => 40)
-      data = WeatherJudge::WeatherData.new(forecast)
-      expect(data.temperature_score).to eq(6.25)
+      it 'should return half of score weight when temp is 50-65 or 75-90' do
+        forecast = double("Forecast", :temperatureMax => 60)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(12.5)
+
+        forecast = double("Forecast", :temperatureMax => 80)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(12.5)
+      end
+
+      it 'should return quarter of score weight when temp is outside of 50-90' do
+        forecast = double("Forecast", :temperatureMax => 40)
+        data = WeatherJudge::WeatherData.new(forecast)
+        expect(data.temperature_score).to eq(6.25)
+      end
     end
   end
 end

@@ -42,11 +42,15 @@ module WeatherJudge
     end
 
     def temperature_score
-      max_temperature = @forecast_today.temperatureMax
+      high_today = @forecast_today.temperatureMax
+      min_ideal_temp = WeatherJudge.ideal_temp_range[:min]
+      max_ideal_temp = WeatherJudge.ideal_temp_range[:max]
+      delta = WeatherJudge.temp_range_delta
 
-      if max_temperature > 67 && max_temperature < 77
+      if high_today > min_ideal_temp && high_today < max_ideal_temp
         SCORE_WEIGHT
-      elsif max_temperature > 55 && max_temperature < 67 || max_temperature > 77 && max_temperature < 85
+      elsif high_today > min_ideal_temp - delta && high_today < min_ideal_temp ||
+          high_today > max_ideal_temp && high_today < max_ideal_temp + delta
         SCORE_WEIGHT.to_f / 2
       else
         SCORE_WEIGHT.to_f / 4
