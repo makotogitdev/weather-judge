@@ -9,7 +9,7 @@ the quality of weather. The maximum score you can get is 100.
 - Wind speed
 - Chance of Rain
 
-Currently it only evaluates today's data but I plan on adding an ability to take a specified date. 
+Currently it only evaluates today's data but I plan on adding the ability to take a specified date. 
 Since there are four criteria, each criteria can be given up to 25 points. By default, optimal 
 weather is considered as a day with comfortable temperature (67-77F), less than 15 mph wind, 
 low chance of rain, and low sky cover.
